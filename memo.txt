@@ -1,0 +1,2 @@
+https://studygyaan.com/django/django-react-setup-best-project-structure
+https://www.django-rest-framework.org/
