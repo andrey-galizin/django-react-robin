@@ -43,7 +43,7 @@ class Position(models.Model):
 
 
 class Palate(models.Model):
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
     palate_name = models.CharField(max_length=50)
     email1 = models.EmailField(max_length=254)
     email2 = models.EmailField(max_length=254)
@@ -67,8 +67,8 @@ class Person(models.Model):
     position = models.ForeignKey(Position, on_delete=models.CASCADE)
     person_name = models.CharField(max_length=50)
     address_name = models.CharField(max_length=50)
-    birthday = birthday.fields.BirthdayField()
-    personal_data_date = birthday.fields.BirthdayField()
+    birthday = models.DateField()
+    personal_data_date = models.DateField()
     email1 = models.EmailField(max_length=254)
     email2 = models.EmailField(max_length=254)
     email3 = models.EmailField(max_length=254)
@@ -77,8 +77,8 @@ class Person(models.Model):
     phone = PhoneField(blank=True, help_text='Contact phone number')
     mobile_phone = PhoneField(blank=True, help_text='Mobile phone number')
     tax_no = models.CharField(max_length=15)
-    active = models.BooleanField(Default=True, help_text='Active license')
-    male_gender = models.BooleanField(Default=False, help_text='Male gender of person')
+    active = models.BooleanField()
+    male_gender = models.BooleanField()
     education_document_series = models.CharField(max_length=10)
     education_document_number = models.CharField(max_length=10)
     education_document_surname = models.CharField(max_length=20)
@@ -98,8 +98,8 @@ class EventType(models.Model):
 class Manager(models.Model):
     manager_name = models.CharField(max_length=50)
     manager_login = models.CharField(max_length=20)
-    write_access = BooleanField(Default=False, help_text='Access to write data')
-    administrator = BooleanField(Default=False, help_text='Administration rights')
+    write_access = models.BooleanField()
+    administrator = models.BooleanField()
     email = models.EmailField(max_length=254)
 
     def __str__(self):
@@ -115,12 +115,12 @@ class Event(models.Model):
     event_name = models.CharField(max_length=50)
     event_conditions = models.CharField(max_length=50)
     event_comment = models.CharField(max_length=200)
-    start_date = birthday.fields.BirthdayField()
-    end_date = birthday.fields.BirthdayField()
-    request_deadline = birthday.fields.BirthdayField()
+    start_date = models.DateField()
+    end_date = models.DateField()
+    request_deadline = models.DateField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    duration_hours = IntegerField()
-    regular = BooleanField(Default=False, help_text='All year regular event')
+    duration_hours = models.IntegerField()
+    regular = models.BooleanField()
     event_folder = models.FileField(upload_to=None, max_length=254)
 
     def __str__(self):
